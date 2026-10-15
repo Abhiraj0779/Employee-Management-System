@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageTitle} + ' | PeopleDesk'">Employee | PeopleDesk</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header class="topbar">
+    <a class="brand" th:href="@{/employees}">
+        <span class="brand-mark small">P</span>
+        <span>
+            PeopleDesk
+            <small>EMPLOYEE MANAGEMENT</small>
+        </span>
+    </a>
+
+    <nav>
+        <a th:href="@{/employees}">Employees</a>
+    </nav>
+
+    <a class="button ghost small-button" th:href="@{/employees}">
+        ← Back to list
+    </a>
+</header>
+
+<main class="container narrow-container">
+
+    <section class="page-heading compact-heading">
+        <div>
+            <p class="eyebrow">PEOPLE OPERATIONS</p>
+            <h1 th:text="${pageTitle}">Add employee</h1>
+            <p class="muted">Enter accurate employee details below.</p>
+        </div>
+    </section>
+
+    <div class="panel form-panel">
+
+        <form th:action="@{/employees}"
+              th:object="${employee}"
+              method="post"
+              class="stack-form">
+
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}">
+
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-grid">
+
+                <label>
+                    First name
+                    <input type="text"
+                           th:field="*{firstName}"
+                           placeholder="e.g. Aarav"
+                           required>
+                    <small class="field-error"
+                           th:errors="*{firstName}"></small>
+                </label>
+
+                <label>
+                    Last name
+                    <input type="text"
+                           th:field="*{lastName}"
+                           placeholder="e.g. Sharma"
+                           required>
+                    <small class="field-error"
+                           th:errors="*{lastName}"></small>
+                </label>
+
+                <label class="span-2">
+                    Work email
+                    <input type="email"
+                           th:field="*{email}"
+                           placeholder="name@company.com"
+                           required>
+                    <small class="field-error"
+                           th:errors="*{email}"></small>
+                </label>
+
+                <label>
+                    Department
+                    <select th:field="*{department}" required>
+                        <option value="">Choose department</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Human Resources">Human Resources</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Operations">Operations</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Design">Design</option>
+                    </select>
+                    <small class="field-error"
+                           th:errors="*{department}"></small>
+                </label>
+
+                <label>
+                    Designation
+                    <input type="text"
+                           th:field="*{designation}"
+                           placeholder="e.g. Software Engineer"
+                           required>
+                    <small class="field-error"
+                           th:errors="*{designation}"></small>
+                </label>
+
+                <label>
+                    Annual salary (INR)
+                    <input type="number"
+                           min="0"
+                           step="0.01"
+                           th:field="*{salary}"
+                           placeholder="650000"
+                           required>
+                    <small class="field-error"
+                           th:errors="*{salary}"></small>
+                </label>
+
+                <label>
+                    Joining date
+                    <input type="date"
+                           th:field="*{joiningDate}"
+                           required>
+                    <small class="field-error"
+                           th:errors="*{joiningDate}"></small>
+                </label>
+
+            </div>
+
+            <div class="form-actions">
+                <a class="button ghost" th:href="@{/employees}">
+                    Cancel
+                </a>
+
+                <button class="button primary" type="submit">
+                    Save employee
+                    <span aria-hidden="true">→</span>
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <footer class="footer">
+        <span>© 2026 PeopleDesk</span>
+        <span>Changes are saved to the local database.</span>
+    </footer>
+
+</main>
+
+</body>
+</html>

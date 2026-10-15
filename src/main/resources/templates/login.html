@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sign in | PeopleDesk</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body class="login-page">
+  <main class="login-card">
+    <div class="brand-mark">P</div>
+    <p class="eyebrow">PEOPLEDESK · HR PORTAL</p>
+    <h1>Welcome back</h1><p class="muted">Sign in to manage employee records.</p>
+    <div class="alert error" th:if="${param.error}">Incorrect username or password.</div>
+    <div class="alert success" th:if="${param.logout}">You have been signed out.</div>
+    <form th:action="@{/login}" method="post" class="stack-form">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <label>Username<input name="username" autocomplete="username" required autofocus placeholder="Enter username"></label>
+      <label>Password<input name="password" type="password" autocomplete="current-password" required placeholder="Enter password"></label>
+      <button class="button primary full" type="submit">Sign in <span aria-hidden="true">→</span></button>
+    </form>
+    <div class="demo-box"><strong>Demo accounts</strong><p><code>admin / admin123</code> — manage records</p><p><code>viewer / viewer123</code> — view records only</p></div>
+  </main>
+</body></html>
